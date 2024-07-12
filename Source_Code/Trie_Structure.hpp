@@ -1,42 +1,44 @@
+#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
-#pragma once
+
+using namespace std;
 
 struct Trie_Node{
     //Pointer to the 26 letters from the alphabet
-    Trie_Node* Child[26];
+    Trie_Node* child[26];
     //The boolean variable marks the end of the word
-    bool End;
+    bool end;
     //Constructor
     Trie_Node(){
-        End = false;
-        for(int i = 0; i < 26; i ++){
-            Child[i] = NULL;
+        end = false;
+        for(int i = 0; i < 26; i++){
+            child[i] = NULL;
         }
     }
 };
 
 //Insert a new word to Trie Structure
-void Insertion(Trie_Node* &Root, std::string str);
+void insertion(Trie_Node* &root, string str);
 
 //Search a word in Trie Structure
-bool Search(Trie_Node* Root, std::string key);
+bool search(Trie_Node* root, string key);
 
 //Delete a word from Trie Structure
-Trie_Node* Delete_Recursion(Trie_Node* Root, std::string str, int count);
-void Deletion(Trie_Node* &Root, std::string str);
+Trie_Node* deleteRecursion(Trie_Node* root, string str, long long count);
+void deletion(Trie_Node* &root, string str);
 
 //Search for words with the same Prefix
-void Search_Prefix(Trie_Node* Root, std::string prefix);
+void searchPrefix(Trie_Node* root, string prefix);
 
 //Display the data from trie
-void Display(Trie_Node* Root, std::string str);
+void display(Trie_Node* root, string str);
 
 //Read data from Dic.txt
-void Read_Data(std::string File_Name, Trie_Node* &Root);
+void readData(string file_name, Trie_Node* &root);
 
 //Function for the Project Problem
-void Word_Generate(Trie_Node* &Root, std::string Input);
-void Word_Generate_Recursion(Trie_Node* Root, const std::string& A, std::vector<std::string> &res, std::string str, bool B[]);
+void wordGenerate(Trie_Node* &root, string Input);
+void wordGenerateRecursion(Trie_Node* root, const string& A, vector<string> &res, string str, bool B[]);

@@ -3,7 +3,7 @@
 #include "Trie_Structure.hpp"
 
 int main (){
-    Trie_Node* Root = new Trie_Node();
-    Word_Generate(Root, "a c e p");
+    Trie_Node* root = new Trie_Node();
+    wordGenerate(root, "a c e p");
     return 0;
 }
