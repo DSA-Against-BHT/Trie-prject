@@ -55,26 +55,6 @@ bool hasChildren(Trie_Node* node) {
     return false;
 }
 
-void display(Trie_Node* root, string str) {
-    if (root->end == true) cout << str << "\n";
-
-    for (int i = 0; i < 26; i++) {
-        if (root->child[i] != NULL) {
-            char c = i + 'a';
-            display(root->child[i], str + c);
-        }
-    }
-}
-
-void searchPrefix(Trie_Node* root, string prefix) {
-    Trie_Node* cur = root;
-    for (int i = 0; i < prefix.size(); i++) {
-        if (cur->child[prefix[i] - 'a'] == NULL) return;
-        cur = cur->child[prefix[i] - 'a'];
-    }
-    display(cur, prefix);
-}
-
 void readData(string file_name, Trie_Node* &root) {
     ifstream fIn;
     fIn.open(file_name.c_str());
@@ -90,16 +70,16 @@ void readData(string file_name, Trie_Node* &root) {
     fIn.close();
 }
 
-void wordGenerateRecursion(Trie_Node* root, const string& A, vector<string> &res, string& str, bool B[]) {
+void wordGenerateRecursion(Trie_Node* root, const string& A, vector<string> &res, string& str, int B[]) {
     if (root->end && str.size() >= 3) res.push_back(str);
 
     for (int i = 0; i < A.size(); ++i) {
-        if (!B[A[i] - 'a'] && root->child[A[i] - 'a'] != nullptr) {
-            B[A[i] - 'a'] = true;
+        if (B[A[i] - 'a'] > 0 & root->child[A[i] - 'a'] != nullptr ) {
+            B[A[i] - 'a'] --;
             str.push_back(A[i]);
             wordGenerateRecursion(root->child[A[i] - 'a'], A, res, str, B);
             str.pop_back();
-            B[A[i] - 'a'] = false;
+            B[A[i] - 'a'] ++;
         }
     }
 }
@@ -108,18 +88,18 @@ void wordGenerate(Trie_Node* &root, string input) {
     readData("Dic.txt", root);
 
     string A;
+    int cnt[26] = {0};
     for (char c : input)
-        if (c != ' ') A.push_back(c);
+        if (c != ' ') A.push_back(c), cnt[c - 'a']++;
+
 
     // Sort and remove duplicates
     sort(A.begin(), A.end());
     A.erase(unique(A.begin(), A.end()), A.end());
 
     vector<string> res;
-    bool B[26] = {0};
-
     string str = "";
-    wordGenerateRecursion(root, A, res, str, B);
+    wordGenerateRecursion(root, A, res, str, cnt);
 
     // Output
     cout << res.size() << "\n";
