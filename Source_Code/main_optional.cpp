@@ -53,33 +53,6 @@ bool hasChildren(Trie_Node* node) {
     return false;
 }
 
-Trie_Node* deleteRecursion(Trie_Node* root, const string& str, long long count) {
-    if (!root) return nullptr;
-
-    if (count == str.size()) {
-        if (root->end) root->end = false;
-
-        if (!hasChildren(root)) {
-            delete root;
-            return nullptr;
-        }
-        return root;
-    }
-
-    root->child[str[count] - 'a'] = deleteRecursion(root->child[str[count] - 'a'], str, count + 1);
-
-    if (!hasChildren(root) && !root->end) {
-        delete root;
-        return nullptr;
-    }
-    return root;
-}
-
-void deletion(Trie_Node* &root, const string& str) {
-    long long count = 0;
-    root = deleteRecursion(root, str, count);
-}
-
 void display(Trie_Node* root, string str) {
     if (root->end == true) cout << str << "\n";
 
