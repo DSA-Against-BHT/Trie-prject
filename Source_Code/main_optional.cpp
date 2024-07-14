@@ -3,9 +3,22 @@
 #include <cstring>
 #include <fstream>
 #include <vector>
-#include "Trie_Structure.hpp"
 
 using namespace std;
+
+struct Trie_Node{
+    // Pointer to the 26 letters from the alphabet
+    Trie_Node* child[26];
+    // The boolean variable marks the end of the word
+    bool end;
+    // Constructor
+    Trie_Node(){
+        end = false;
+        for(int i = 0; i < 26; i++){
+            child[i] = NULL;
+        }
+    }
+};
 
 void inputConsole(string &input) {
     cout << "Input list of letters: ";
@@ -137,4 +150,12 @@ void wordGenerate(Trie_Node* &root, string input) {
     cout << res.size() << "\n";
     for (const string& word : res)
         cout << word << "\n";
+}
+
+int main() {
+    Trie_Node* root = new Trie_Node();
+    string input;
+    inputConsole(input);
+    wordGenerate(root, input);
+    return 0;
 }

@@ -2,7 +2,7 @@
 #include <string>
 #include "Trie_Structure.hpp"
 
-int main (){
+int main() {
     Trie_Node* root = new Trie_Node();
     string input;
     inputConsole(input);

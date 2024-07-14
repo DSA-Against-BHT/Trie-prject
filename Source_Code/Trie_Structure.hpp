@@ -21,7 +21,7 @@ struct Trie_Node{
 };
 
 // Function to input data from console
-void inputConsole(string input);
+void inputConsole(string &input);
 
 // Insert a new word to Trie Structure
 void insertion(Trie_Node* &root, string str);
