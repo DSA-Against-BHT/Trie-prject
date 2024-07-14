@@ -4,6 +4,8 @@
 
 int main (){
     Trie_Node* root = new Trie_Node();
-    wordGenerate(root, "a c e p");
+    string input;
+    inputConsole(input);
+    wordGenerate(root, input);
     return 0;
 }
