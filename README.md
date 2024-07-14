@@ -1,5 +1,9 @@
 # Trie-prject
 
+# Command to run out the file .exe (except main_optional.cpp): 
+    g++ -std=c++11 *.cpp -o main
+// this will run out the main.exe so if you you want to run this code you must: ".\main"
+
 # Idea
 ~Khởi Tạo~
 Build cây trie:
