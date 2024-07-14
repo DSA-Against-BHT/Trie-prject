@@ -3,6 +3,8 @@
 #include <cstring>
 #include <fstream>
 #include <vector>
+#include <algorithm>
+
 
 using namespace std;
 
@@ -60,7 +62,7 @@ void display(Trie_Node* root, string str) {
         if (root->child[i] != NULL) {
             char c = i + 'a';
             display(root->child[i], str + c);
-        } 
+        }
     }
 }
 
@@ -90,7 +92,7 @@ void readData(string file_name, Trie_Node* &root) {
 
 void wordGenerateRecursion(Trie_Node* root, const string& A, vector<string> &res, string& str, bool B[]) {
     if (root->end && str.size() >= 3) res.push_back(str);
-    
+
     for (int i = 0; i < A.size(); ++i) {
         if (!B[A[i] - 'a'] && root->child[A[i] - 'a'] != nullptr) {
             B[A[i] - 'a'] = true;
@@ -104,21 +106,21 @@ void wordGenerateRecursion(Trie_Node* root, const string& A, vector<string> &res
 
 void wordGenerate(Trie_Node* &root, string input) {
     readData("Dic.txt", root);
-    
+
     string A;
     for (char c : input)
         if (c != ' ') A.push_back(c);
-    
+
     // Sort and remove duplicates
     sort(A.begin(), A.end());
     A.erase(unique(A.begin(), A.end()), A.end());
-    
+
     vector<string> res;
     bool B[26] = {0};
-    
+
     string str = "";
     wordGenerateRecursion(root, A, res, str, B);
-    
+
     // Output
     cout << res.size() << "\n";
     for (const string& word : res)
